@@ -14,7 +14,7 @@ public class LogsExporter {
     
     // MARK: - Export
     
-    public func exportAllLogsAsText(store: LoggerStore) async throws -> String {
+    public static func exportAllLogsAsText(store: LoggerStore) async throws -> String {
         let sessionsEntities = try await withUnsafeThrowingContinuation { continuation in
             store.backgroundContext.perform {
                 let request = NSFetchRequest<LoggerSessionEntity>(entityName: "\(LoggerSessionEntity.self)")
@@ -37,7 +37,7 @@ public class LogsExporter {
     
     // MARK: - Private
     
-    private func prepareForSharing(store: LoggerStore, output: ShareOutput, options: LoggerStore.ExportOptions) async throws -> ShareItems {
+    private static func prepareForSharing(store: LoggerStore, output: ShareOutput, options: LoggerStore.ExportOptions) async throws -> ShareItems {
         let entities = try await withUnsafeThrowingContinuation { continuation in
             store.backgroundContext.perform {
                 let request = NSFetchRequest<LoggerMessageEntity>(entityName: "\(LoggerMessageEntity.self)")
